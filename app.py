@@ -58,8 +58,9 @@ try:
             print(f"⚠️ Warning: Could not find file {local_path}")
 
     # --- 5. Render ---
-    components.html(html_string, height=3000, scrolling=True)
+    components.html(html_string, height=4500, scrolling=True)
 
 except FileNotFoundError:
     st.error("Could not find index.html")
+
 
