@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEETANJALI | Digital Creator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <!-- Added FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #e0e0e0;
+            --accent-pink: #ff0080;
+            --accent-orange: #ff8c00;
+            --glass-bg: rgba(20, 20, 20, 0.8);
+            --border-color: #333;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at 50% 50%, #1a0b14 0%, #000000 100%);
+            font-family: 'Rajdhani', sans-serif;
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 2rem;
+            overflow-x: hidden; /* Prevent horizontal scroll on mobile */
+        }
+
+        /* Typography */
+        h1, h2, h3 { font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 2px; }
+
+        h1 {
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 0px 20px rgba(255, 0, 128, 0.5);
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        h2 {
+            color: var(--accent-pink);
+            border-bottom: 2px solid var(--accent-pink);
+            padding-bottom: 10px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        p { font-size: 1.1rem; line-height: 1.6; margin-bottom: 1rem; }
+
+        /* Layout */
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section { grid-template-columns: 1fr; text-align: center; }
+            h1 { font-size: 2.2rem; }
+            .metrics-grid { grid-template-columns: 1fr 1fr 1fr; } /* Keep metrics inline on mobile */
+        }
+
+        .profile-wrapper {
+            position: relative;
+        }
+
+        .profile-img {
+            width: 100%;
+            max-width: 400px; /* Limit size */
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 0, 128, 0.3);
+            border: 1px solid var(--border-color);
+            object-fit: cover;
+            aspect-ratio: 1/1; /* Makes it a perfect square */
+        }
+
+        /* Social Buttons */
+        .social-buttons {
+            display: flex;
+            justify-content: center; /* Center buttons relative to image */
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            padding: 10px 20px;
+            background: linear-gradient(45deg, var(--accent-pink), #8000ff);
+            color: white;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .social-link:hover { transform: translateY(-3px); box-shadow: 0 5px 20px rgba(255, 0, 128, 0.6); }
+
+        /* Metrics */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: var(--glass-bg);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        
+        .metric-card:hover { border-color: var(--accent-pink); }
+
+        .metric-label { color: var(--accent-orange); font-size: 0.8rem; margin-bottom: 5px; letter-spacing: 1px; }
+        .metric-value { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; color: white; text-shadow: 0 0 10px var(--accent-pink); }
+
+        /* Tabs */
+        .tabs { margin-top: 4rem; }
+        .tab-headers { display: flex; gap: 2rem; border-bottom: 1px solid #333; margin-bottom: 2rem; justify-content: center; }
+        .tab-btn { background: none; border: none; color: #666; font-family: 'Orbitron', sans-serif; padding: 10px 20px; cursor: pointer; font-size: 1.1rem; position: relative; transition: 0.3s; }
+        .tab-btn:hover { color: #fff; }
+        .tab-btn.active { color: var(--accent-pink); }
+        .tab-btn.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 3px; background: var(--accent-pink); box-shadow: 0 0 10px var(--accent-pink); }
+
+        /* Works Grid */
+        .works-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .work-item { background: #111; padding: 10px; border-radius: 8px; border: 1px solid #333; }
+        .work-item img, .work-item video { width: 100%; border-radius: 4px; transition: opacity 0.3s; }
+        .work-item h3 { margin-top: 10px; margin-bottom: 5px; }
+        
+        .instagram-btn {
+            display: block;
+            margin-top: 10px;
+            background: #222;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            text-align: center;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .instagram-btn:hover { background: var(--accent-pink); }
+
+        /* Form */
+        .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+        @media(max-width: 768px) { .contact-layout { grid-template-columns: 1fr; gap: 2rem; } }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: var(--accent-orange); }
+        input, textarea { width: 100%; background-color: rgba(255,255,255,0.05); color: white; border: 1px solid #333; padding: 15px; font-family: 'Rajdhani', sans-serif; font-size: 1rem; border-radius: 4px; }
+        input:focus, textarea:focus { outline: none; border-color: var(--accent-pink); box-shadow: 0 0 15px rgba(255, 0, 128, 0.2); }
+        button.submit-btn { background-color: transparent; border: 2px solid var(--accent-pink); color: var(--accent-pink); font-family: 'Orbitron', sans-serif; padding: 15px 30px; cursor: pointer; transition: 0.3s; text-transform: uppercase; width: 100%; font-size: 1.1rem; letter-spacing: 2px; }
+        button.submit-btn:hover { background-color: var(--accent-pink); color: white; box-shadow: 0 0 30px var(--accent-pink); transform: scale(1.02); }
+
+        /* Footer */
+        footer { margin-top: 6rem; border-top: 1px solid #333; padding: 2rem 0; text-align: center; color: #555; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="left-col profile-wrapper">
+                <!-- ⚠️ IMPORTANT: Replace 'https://images.unsplash.com...' with your local file name like 'profile.jpg' if you have one -->
+                <img src="geet.jpg" alt="Geetanjali Profile" class="profile-img">
+                <div class="social-buttons">
+                    <a href="https://www.instagram.com/iamgeetanjali._" target="_blank" class="social-link"><i class="fab fa-instagram"></i> INSTAGRAM</a>
+                    <a href="#" class="social-link"><i class="fab fa-email"></i> EMAIL</a>
+                </div>
+            </div>
+            
+            <div class="right-col">
+                <h1>GEETANJALI SINGH</h1>
+                <p style="color: #ff8c00; font-family: 'Orbitron', sans-serif; letter-spacing: 2px; font-weight: bold;">@iamgeetanjali._</p>
+                <h3 style="font-size: 1.2rem; color: #aaa;">Digital Creator // Visual Storyteller // Influencer</h3>
+                <hr style="border: 0; border-top: 1px solid #333; margin: 1.5rem 0;">
+                <p>
+                    Exploring cafes, food, and lifestyle through my lens. I create aesthetic visuals, honest recommendations, and mood-filled content that helps you discover new places, flavors, and experiences. Join me on this visually delicious journey.
+                </p>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">FOLLOWERS</div>
+                        <div class="metric-value">600+</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">LIFETIME VIEWS</div>
+                        <div class="metric-value">100k+</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">REACH</div>
+                        <div class="metric-value">50K</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Portfolio Sections -->
+        <div class="tabs">
+            <div class="tab-headers">
+                <button class="tab-btn active" onclick="showTab('works')">⚡ MY WORKS</button>
+                <button class="tab-btn" onclick="showTab('reels')">🎥 REELS</button>
+                <button class="tab-btn" onclick="showTab('contact')">📨 CONTACT</button>
+            </div>
+
+            <!-- Works Tab -->
+<div id="works" class="tab-content">
+    <div class="works-grid">
+
+        <div class="work-item">
+            <video controls poster="poster1.jpg">
+                <source src="QUACI.mp4" type="video/mp4">
+            </video>
+            <h3>Cafe Vibes</h3>
+            <a href="https://www.instagram.com/reel/DRrkRTgAYy_/" target="_blank" class="instagram-btn">
+                <i class="fab fa-instagram"></i> View on Instagram
+            </a>
+        </div>
+
+        <div class="work-item">
+            <video controls poster="poster2.jpg">
+                <source src="diego.mp4" type="video/mp4">
+            </video>
+            <h3>Gourmet Experience</h3>
+            <a href="https://www.instagram.com/reel/DRuIcJJAWCL/" target="_blank" class="instagram-btn">
+                <i class="fab fa-instagram"></i> View on Instagram
+            </a>
+        </div>
+
+    </div> <!-- END works-grid -->
+</div> <!-- END works tab -->
+
+                    
+
+            <!-- Reels Tab -->
+            <div id="reels" class="tab-content" style="display:none;">
+                <div class="works-grid">
+                    <div class="work-item">
+                         <!-- Using an Iframe is usually better for Instagram Reels if you can get the embed code, otherwise video tag is fine -->
+                        <video controls width="100%">
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-coffee-cup-on-a-table-in-a-coffeeshop-4246-large.mp4" type="video/mp4">
+                        </video>
+                        <h3>Trending: Morning Routine</h3>
+                    </div>
+                    <!-- Add more reels here -->
+                </div>
+            </div>
+
+            <!-- Contact Tab -->
+            <div id="contact" class="tab-content" style="display:none;">
+                <h2>Get In Touch</h2>
+                <div class="contact-layout">
+                    <div>
+                        <p>
+                            Open for collaborations, brand deals, and creative projects.
+                            Let's create something amazing together.
+                        </p>
+                        <div style="margin-top: 30px; background: #111; padding: 20px; border-radius: 8px;">
+                            <p><strong>📧 Email:</strong><br> <span style="color:white; font-size: 1.2rem;">contact@geetanjali.work</span></p>
+                            <p style="margin-top: 15px;"><strong>📍 Base:</strong><br> India // Digital Space</p>
+                        </div>
+                    </div>
+                    <div>
+                        <form onsubmit="event.preventDefault(); alert('✅ Message Sent! (Note: This is a demo form. Use Formspree for real emails)');">
+                            <div class="form-group">
+                                <label class="form-label">YOUR NAME</label>
+                                <input type="text" placeholder="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">YOUR EMAIL</label>
+                                <input type="email" placeholder="john@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">MESSAGE / COLLAB REQUEST</label>
+                                <textarea rows="4" placeholder="Hi Geetanjali, I'd like to collaborate..."></textarea>
+                            </div>
+                            <button class="submit-btn">SEND MESSAGE</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            © 2025 GEETANJALI | @iamgeetanjali._ <br>
+            <span style="opacity: 0.5; margin-top: 5px; display: inline-block;">DESIGNED FOR STREAMLIT & WEB</span>
+        </footer>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.style.display = 'none');
+            
+            document.getElementById(tabName).style.display = 'block';
+            
+            const btns = document.querySelectorAll('.tab-btn');
+            btns.forEach(btn => btn.classList.remove('active'));
+            
+            // Highlight the correct button
+            const clickedBtn = Array.from(btns).find(btn => 
+                btn.getAttribute('onclick').includes(tabName)
+            );
+            if(clickedBtn) clickedBtn.classList.add('active');
+        }
+    </script>
+</body>
+</html>
