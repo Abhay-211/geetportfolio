@@ -38,3 +38,4 @@ try:
 
 except FileNotFoundError:
     st.error("The file 'index.html' was not found.")
+
