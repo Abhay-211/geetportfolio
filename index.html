@@ -187,14 +187,27 @@
         .instagram-btn:hover { background: var(--accent-pink); }
 
         /* Form */
-        .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-        .form-group { margin-bottom: 1.5rem; }
-        .form-label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: var(--accent-orange); }
-        input, textarea { width: 100%; background-color: rgba(255,255,255,0.05); color: white; border: 1px solid #333; padding: 15px; font-family: 'Rajdhani', sans-serif; font-size: 1rem; border-radius: 4px; }
-        input:focus, textarea:focus { outline: none; border-color: var(--accent-pink); box-shadow: 0 0 15px rgba(255, 0, 128, 0.2); }
-        button.submit-btn { background-color: transparent; border: 2px solid var(--accent-pink); color: var(--accent-pink); font-family: 'Orbitron', sans-serif; padding: 15px 30px; cursor: pointer; transition: 0.3s; text-transform: uppercase; width: 100%; font-size: 1.1rem; letter-spacing: 2px; }
-        button.submit-btn:hover { background-color: var(--accent-pink); color: white; box-shadow: 0 0 30px var(--accent-pink); transform: scale(1.02); }
+        ./* --- REPLACE THE OLD .contact-layout BLOCK WITH THIS --- */
+        
+        .contact-layout { 
+            display: flex;       /* Use Flexbox instead of Grid */
+            flex-wrap: wrap;     /* ⚠️ This command forces them to stack if space is tight */
+            gap: 3rem;           /* Space between the stacked items */
+            width: 100%;
+        }
 
+        .contact-layout > div {
+            flex: 1 1 400px;     /* "Grow, Shrink, but try to be at least 400px wide" */
+            min-width: 300px;    /* If the screen is smaller than 300px (unlikely), wrap immediately */
+            width: 100%;         /* Ensure it takes full width when stacked */
+        }
+
+        /* Update this too just in case */
+        @media(max-width: 768px) { 
+            .contact-layout { 
+                flex-direction: column; /* Force stack on mobile just to be safe */
+            } 
+        }
         /* Footer */
 footer { 
     margin-top: 6rem; 
@@ -364,5 +377,6 @@ footer {
 </body>
 
 </html>
+
 
 
