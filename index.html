@@ -196,8 +196,18 @@
         button.submit-btn:hover { background-color: var(--accent-pink); color: white; box-shadow: 0 0 30px var(--accent-pink); transform: scale(1.02); }
 
         /* Footer */
-        footer { margin-top: 6rem; border-top: 1px solid #333; padding: 2rem 0; text-align: center; color: #555; font-size: 0.8rem; }
-    </style>
+footer { 
+    margin-top: 6rem; 
+    border-top: 1px solid #333; 
+    padding: 2rem 0; 
+    
+    /* NEW: Adds massive space at the bottom to prevent cropping on phones */
+    padding-bottom: 150px; 
+    
+    text-align: center; 
+    color: #555; 
+    font-size: 0.8rem; 
+}    </style>
 </head>
 <body>
 
@@ -354,4 +364,5 @@
 </body>
 
 </html>
+
 
