@@ -1,6 +1,10 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
+from PIL import Image
+
+# This works locally AND on deployment without changing anything
+st.image("images/geet.jpg")
 # Set page configuration to wide mode
 st.set_page_config(layout="wide", page_title="Geetanjali Portfolio")
 
@@ -11,4 +15,5 @@ with open("index.html", 'r', encoding='utf-8') as f:
 
 # Render the HTML
 # height needs to be adjusted based on content length
+
 components.html(html_string, height=1500, scrolling=True)
