@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GEETANJALI | Digital Creator</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
-    <!-- Added FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -25,11 +24,9 @@
             font-family: 'Rajdhani', sans-serif;
             color: var(--text-color);
             min-height: 100vh;
-            
-            /* FIXED: Changed padding to be responsive */
             padding: 1rem; 
             width: 100%;
-            overflow-x: hidden; /* Strongly enforce no side scrolling */
+            overflow-x: hidden; 
         }
 
         /* Typography */
@@ -43,7 +40,7 @@
             font-size: 3rem;
             margin-bottom: 0.5rem;
             line-height: 1.2;
-            word-wrap: break-word; /* FIXED: Prevents long names from cutting off */
+            word-wrap: break-word; 
         }
 
         h2 {
@@ -61,7 +58,7 @@
         .container { 
             max-width: 1200px; 
             margin: 0 auto; 
-            width: 100%; /* FIXED: Ensures container fits screen */
+            width: 100%; 
         }
 
         .hero-section {
@@ -72,9 +69,9 @@
             align-items: center;
         }
 
-        /* FIXED: Improved Mobile Responsiveness */
+        /* Mobile Responsiveness */
         @media (max-width: 768px) {
-            body { padding: 0.5rem; } /* Reduce edge padding on phones */
+            body { padding: 0.5rem; }
             
             .hero-section { 
                 grid-template-columns: 1fr; 
@@ -82,32 +79,30 @@
                 gap: 1.5rem;
             }
             
-            h1 { font-size: 2rem; } /* Smaller font for mobile */
+            h1 { font-size: 2rem; }
             
             .metrics-grid { 
-                grid-template-columns: 1fr; /* Stack metrics on very small screens */
+                grid-template-columns: 1fr; 
                 gap: 10px;
             } 
             
             .tab-headers {
-                flex-wrap: wrap; /* Allows buttons to stack if screen is too thin */
+                flex-wrap: wrap; 
                 gap: 10px;
             }
-            
-            .contact-layout { grid-template-columns: 1fr; gap: 2rem; }
         }
 
         .profile-wrapper { position: relative; }
 
         .profile-img {
             width: 100%;
-            max-width: 350px; /* Limit size */
+            max-width: 350px; 
             border-radius: 15px;
             box-shadow: 0 0 30px rgba(255, 0, 128, 0.3);
             border: 1px solid var(--border-color);
             object-fit: cover;
             aspect-ratio: 1/1; 
-            margin: 0 auto; /* Center image */
+            margin: 0 auto; 
             display: block;
         }
 
@@ -117,7 +112,7 @@
             justify-content: center;
             gap: 15px;
             margin-top: 20px;
-            flex-wrap: wrap; /* FIXED: Allows buttons to wrap on tiny screens */
+            flex-wrap: wrap; 
         }
 
         .social-link {
@@ -147,7 +142,7 @@
 
         .metric-card {
             background: var(--glass-bg);
-            padding: 1rem; /* Reduced padding slightly */
+            padding: 1rem; 
             border: 1px solid var(--border-color);
             border-radius: 8px;
             text-align: center;
@@ -186,55 +181,72 @@
         }
         .instagram-btn:hover { background: var(--accent-pink); }
 
-        /* Form */
-        ./* --- REPLACE THE OLD .contact-layout BLOCK WITH THIS --- */
-        
+        /* --- FIXED CONTACT LAYOUT --- */
         .contact-layout { 
-            display: flex;       /* Use Flexbox instead of Grid */
-            flex-wrap: wrap;     /* ⚠️ This command forces them to stack if space is tight */
-            gap: 3rem;           /* Space between the stacked items */
+            display: flex;
+            flex-direction: row; /* Default: Side by Side */
+            gap: 4rem;
             width: 100%;
         }
 
         .contact-layout > div {
-            flex: 1 1 400px;     /* "Grow, Shrink, but try to be at least 400px wide" */
-            min-width: 300px;    /* If the screen is smaller than 300px (unlikely), wrap immediately */
-            width: 100%;         /* Ensure it takes full width when stacked */
+            flex: 1; /* Both sides equal width */
+            width: 100%;
         }
 
-        /* Update this too just in case */
+        /* Mobile specific styling for Contact */
         @media(max-width: 768px) { 
             .contact-layout { 
-                flex-direction: column; /* Force stack on mobile just to be safe */
+                flex-direction: column; /* FORCE Stack Top-to-Bottom */
+                gap: 2rem;
             } 
         }
+
+        /* Form Styling */
+        .form-group { margin-bottom: 1.5rem; }
+        .form-label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: var(--accent-orange); }
+        input, textarea { width: 100%; background-color: rgba(255,255,255,0.05); color: white; border: 1px solid #333; padding: 15px; font-family: 'Rajdhani', sans-serif; font-size: 1rem; border-radius: 4px; }
+        input:focus, textarea:focus { outline: none; border-color: var(--accent-pink); box-shadow: 0 0 15px rgba(255, 0, 128, 0.2); }
+        
+        button.submit-btn { 
+            background-color: transparent; 
+            border: 2px solid var(--accent-pink); 
+            color: var(--accent-pink); 
+            font-family: 'Orbitron', sans-serif; 
+            padding: 15px 30px; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            text-transform: uppercase; 
+            width: 100%; 
+            font-size: 1.1rem; 
+            letter-spacing: 2px; 
+        }
+        button.submit-btn:hover { background-color: var(--accent-pink); color: white; box-shadow: 0 0 30px var(--accent-pink); transform: scale(1.02); }
+
         /* Footer */
-footer { 
-    margin-top: 6rem; 
-    border-top: 1px solid #333; 
-    padding: 2rem 0; 
-    
-    /* NEW: Adds massive space at the bottom to prevent cropping on phones */
-    padding-bottom: 150px; 
-    
-    text-align: center; 
-    color: #555; 
-    font-size: 0.8rem; 
-}    </style>
+        footer { 
+            margin-top: 6rem; 
+            border-top: 1px solid #333; 
+            padding: 2rem 0; 
+            /* Huge padding at bottom to prevent Streamlit cutoff */
+            padding-bottom: 150px; 
+            text-align: center; 
+            color: #555; 
+            font-size: 0.8rem; 
+        }
+    </style>
 </head>
 <body>
 
     <div class="container">
         
-        <!-- Hero Section -->
         <div class="hero-section">
             <div class="left-col profile-wrapper">
-                <!-- ⚠️ IMPORTANT: Replace 'https://images.unsplash.com...' with your local file name like 'profile.jpg' if you have one -->
                 <img src="images/geet.jpg" alt="Geetanjali Profile" class="profile-img">
 
                 <div class="social-buttons">
                     <a href="https://www.instagram.com/iamgeetanjali._" target="_blank" class="social-link"><i class="fab fa-instagram"></i> INSTAGRAM</a>
-                    <a href="#" class="social-link"><i class="fab fa-email"></i> EMAIL</a>
+                    <a href="#" class="social-link"><i class="fab fa-envelope"></i> EMAIL</a>
                 </div>
             </div>
             
@@ -264,7 +276,6 @@ footer {
             </div>
         </div>
 
-        <!-- Portfolio Sections -->
         <div class="tabs">
             <div class="tab-headers">
                 <button class="tab-btn active" onclick="showTab('works')">⚡ MY WORKS</button>
@@ -272,78 +283,77 @@ footer {
                 <button class="tab-btn" onclick="showTab('contact')">📨 CONTACT</button>
             </div>
 
-            <!-- Works Tab -->
-<div id="works" class="tab-content">
-    <div class="works-grid">
+            <div id="works" class="tab-content">
+                <div class="works-grid">
+                    <div class="work-item">
+                        <video controls poster="images/poster1.jpg">
+                            <source src="images/QUACI.mp4" type="video/mp4">
+                        </video>
+                        <h3>Cafe Vibes</h3>
+                        <a href="https://www.instagram.com/reel/DRrkRTgAYy_/" target="_blank" class="instagram-btn">
+                            <i class="fab fa-instagram"></i> View on Instagram
+                        </a>
+                    </div>
 
-        <div class="work-item">
-            <video controls poster="images/poster1.jpg">
-                <source src="images/QUACI.mp4" type="video/mp4">
-            </video>
-            <h3>Cafe Vibes</h3>
-            <a href="https://www.instagram.com/reel/DRrkRTgAYy_/" target="_blank" class="instagram-btn">
-                <i class="fab fa-instagram"></i> View on Instagram
-            </a>
-        </div>
+                    <div class="work-item">
+                        <video controls poster="images/poster2.jpg">
+                            <source src="images/diego.mp4" type="video/mp4">
+                        </video>
+                        <h3>Gourmet Experience</h3>
+                        <a href="https://www.instagram.com/reel/DRuIcJJAWCL/" target="_blank" class="instagram-btn">
+                            <i class="fab fa-instagram"></i> View on Instagram
+                        </a>
+                    </div>
+                </div> 
+            </div> 
 
-        <div class="work-item">
-            <video controls poster="images/poster2.jpg">
-                <source src="images/diego.mp4" type="video/mp4">
-            </video>
-            <h3>Gourmet Experience</h3>
-            <a href="https://www.instagram.com/reel/DRuIcJJAWCL/" target="_blank" class="instagram-btn">
-                <i class="fab fa-instagram"></i> View on Instagram
-            </a>
-        </div>
-
-    </div> <!-- END works-grid -->
-</div> <!-- END works tab -->
-
-                    
-
-            <!-- Reels Tab -->
             <div id="reels" class="tab-content" style="display:none;">
                 <div class="works-grid">
                     <div class="work-item">
-                         <!-- Using an Iframe is usually better for Instagram Reels if you can get the embed code, otherwise video tag is fine -->
                         <video controls width="100%">
                             <source src="https://assets.mixkit.co/videos/preview/mixkit-coffee-cup-on-a-table-in-a-coffeeshop-4246-large.mp4" type="video/mp4">
                         </video>
                         <h3>Trending: Morning Routine</h3>
                     </div>
-                    <!-- Add more reels here -->
                 </div>
             </div>
 
-            <!-- Contact Tab -->
             <div id="contact" class="tab-content" style="display:none;">
                 <h2>Get In Touch</h2>
+                
                 <div class="contact-layout">
                     <div>
                         <p>
                             Open for collaborations, brand deals, and creative projects.
                             Let's create something amazing together.
                         </p>
-                        <div style="margin-top: 30px; background: #111; padding: 20px; border-radius: 8px;">
-                            <p><strong>📧 Email:</strong><br> <span style="color:white; font-size: 1.2rem;">contact@geetanjali.work</span></p>
-                            <p style="margin-top: 15px;"><strong>📍 Base:</strong><br> India // Digital Space</p>
+                        <div style="margin-top: 30px; background: #0a0a0a; padding: 25px; border-radius: 12px; border: 1px solid #333;">
+                            <p style="margin-bottom: 15px;">
+                                <strong style="color: #fff;"><i class="fas fa-envelope"></i> Email:</strong><br> 
+                                <span style="color: #e0e0e0; font-size: 1.1rem;">contact@geetanjali.work</span>
+                            </p>
+                            <p>
+                                <strong style="color: #fff;"><i class="fas fa-map-marker-alt"></i> Base:</strong><br>
+                                <span style="color: #e0e0e0; font-size: 1.1rem;">India // Digital Space</span>
+                            </p>
                         </div>
                     </div>
+
                     <div>
-                        <form onsubmit="event.preventDefault(); alert('✅ Message Sent! (Note: This is a demo form. Use Formspree for real emails)');">
+                        <form action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
                             <div class="form-group">
                                 <label class="form-label">YOUR NAME</label>
-                                <input type="text" placeholder="John Doe">
+                                <input type="text" name="name" placeholder="John Doe" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">YOUR EMAIL</label>
-                                <input type="email" placeholder="john@example.com">
+                                <input type="email" name="email" placeholder="john@example.com" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">MESSAGE / COLLAB REQUEST</label>
-                                <textarea rows="4" placeholder="Hi Geetanjali, I'd like to collaborate..."></textarea>
+                                <textarea rows="4" name="message" placeholder="Hi Geetanjali, I'd like to collaborate..." required></textarea>
                             </div>
-                            <button class="submit-btn">SEND MESSAGE</button>
+                            <button class="submit-btn" type="submit">SEND MESSAGE</button>
                         </form>
                     </div>
                 </div>
@@ -375,8 +385,4 @@ footer {
         }
     </script>
 </body>
-
 </html>
-
-
-
