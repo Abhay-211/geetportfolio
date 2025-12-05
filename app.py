@@ -1,25 +1,40 @@
 import streamlit as st
 import streamlit.components.v1 as components
-from PIL import Image
+import base64
 
-# --- CORRECTION 1: set_page_config must be the first st command ---
+# 1. Set page config MUST be the first Streamlit command
 st.set_page_config(layout="wide", page_title="Geetanjali Portfolio")
 
-# --- Display the image ---
-# Make sure you have a folder named 'images' with 'geet.jpg' inside it
-try:
-    st.image("images/geet.jpg") 
-except FileNotFoundError:
-    st.error("Image file not found. Please check 'images/geet.jpg' exists.")
+# Function to convert image to base64 so HTML can read it
+def get_base64_image(image_path):
+    try:
+        with open(image_path, "rb") as img_file:
+            return base64.b64encode(img_file.read()).decode()
+    except FileNotFoundError:
+        return None
 
-# --- CORRECTION 2: Fixed the broken 'utf-8' string ---
-# Read the HTML file
+# 2. Get the Base64 string of your image
+image_path = "images/geet.jpg" 
+img_base64 = get_base64_image(image_path)
+
+if img_base64:
+    img_src = f"data:image/jpg;base64,{img_base64}"
+else:
+    # Fallback if image isn't found
+    img_src = "https://via.placeholder.com/400" 
+    st.error("Could not find 'images/geet.jpg'. Check your folder structure.")
+
+# 3. Read the HTML file
 try:
     with open("index.html", 'r', encoding='utf-8') as f:
         html_string = f.read()
 
-    # Render the HTML
+    # 4. MAGIC STEP: Replace the local path in HTML with the Base64 data
+    # This finds "images/geet.jpg" in your HTML and swaps it for the actual image data
+    html_string = html_string.replace("images/geet.jpg", img_src)
+
+    # 5. Render the HTML
     components.html(html_string, height=1500, scrolling=True)
 
 except FileNotFoundError:
-    st.error("The file 'index.html' was not found in the directory.")
+    st.error("The file 'index.html' was not found.")
