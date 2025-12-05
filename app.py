@@ -1,41 +1,64 @@
 import streamlit as st
 import streamlit.components.v1 as components
 import base64
+import os
 
-# 1. Set page config MUST be the first Streamlit command
 st.set_page_config(layout="wide", page_title="Geetanjali Portfolio")
 
-# Function to convert image to base64 so HTML can read it
-def get_base64_image(image_path):
+# --- 1. Function to convert any file (img/video) to Base64 ---
+def get_base64_file(file_path):
     try:
-        with open(image_path, "rb") as img_file:
-            return base64.b64encode(img_file.read()).decode()
+        with open(file_path, "rb") as f:
+            data = f.read()
+            return base64.b64encode(data).decode()
     except FileNotFoundError:
         return None
 
-# 2. Get the Base64 string of your image
-image_path = "images/geet.jpg" 
-img_base64 = get_base64_image(image_path)
+# --- 2. List of files to replace ---
+# FORMAT: "The path inside HTML" : "Real path on computer"
+# You must list every file you want to load here.
+files_to_process = {
+    # Images
+    "images/geet.jpg": "images/geet.jpg",
+    "images/poster1.jpg": "images/poster1.jpg",
+    "images/poster2.jpg": "images/poster2.jpg",
+    
+    # Videos (Note: Keep these small for best performance!)
+    "images/QUACI.mp4": "images/QUACI.mp4",
+    "images/diego.mp4": "images/diego.mp4"
+}
 
-if img_base64:
-    img_src = f"data:image/jpg;base64,{img_base64}"
-else:
-    # Fallback if image isn't found
-    img_src = "https://via.placeholder.com/400" 
-    st.error("Could not find 'images/geet.jpg'. Check your folder structure.")
-
-# 3. Read the HTML file
+# --- 3. Read HTML ---
 try:
     with open("index.html", 'r', encoding='utf-8') as f:
         html_string = f.read()
 
-    # 4. MAGIC STEP: Replace the local path in HTML with the Base64 data
-    # This finds "images/geet.jpg" in your HTML and swaps it for the actual image data
-    html_string = html_string.replace("images/geet.jpg", img_src)
+    # --- 4. Loop through the list and replace them all ---
+    for html_path, local_path in files_to_process.items():
+        b64_data = get_base64_file(local_path)
+        
+        if b64_data:
+            # Determine the file type (MIME type)
+            if local_path.endswith(".mp4"):
+                mime = "data:video/mp4;base64,"
+            elif local_path.endswith(".jpg") or local_path.endswith(".jpeg"):
+                mime = "data:image/jpeg;base64,"
+            elif local_path.endswith(".png"):
+                mime = "data:image/png;base64,"
+            else:
+                mime = "" # Fallback
+            
+            # Create the full source string
+            new_src = mime + b64_data
+            
+            # Replace it in the HTML string
+            html_string = html_string.replace(html_path, new_src)
+            print(f"Successfully loaded: {local_path}")
+        else:
+            print(f"⚠️ Warning: Could not find file {local_path}")
 
-    # 5. Render the HTML
+    # --- 5. Render ---
     components.html(html_string, height=1500, scrolling=True)
 
 except FileNotFoundError:
-    st.error("The file 'index.html' was not found.")
-
+    st.error("Could not find index.html")
